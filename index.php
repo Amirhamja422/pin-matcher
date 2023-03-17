@@ -12,15 +12,15 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control" type="text">
-                    <button class="generate-btn">Generate Pin</button>
+                    <input id="display-pin"  class="form-control" type="text">
+                    <button onclick ="generatePin()" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input id="typed-numbers" class="form-control" type="text">
                     <div class="numbers">
-                        <div class="calc-body">
+                        <div id="key-pad" class="calc-body">
                             <div class="calc-button-row">
                               <div class="button">7</div>
                               <div class="button">8</div>
@@ -56,3 +56,52 @@
     </div>
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script>
+
+
+////////////////////////////use event bubble to create calculator and clear start //////////////////////////////////
+document.getElementById('key-pad').addEventListener('click', function(event){
+ const number =  event.target.innerText;
+ const calcInput= document.getElementById('typed-numbers');
+ if(isNaN(number)){
+    if(number =='C'){
+     calcInput.value =''; 
+    }
+//   console.log("Invalid");
+ }else{
+ const previousNumber = calcInput.value;
+ const newNumber = previousNumber + number;
+ calcInput.value = newNumber;
+ }
+});
+
+
+
+
+
+
+////////////////////////////4 digit pin generator start ///////////////////////////////////////////////////////////
+ 
+function getPin(){
+  const pin = Math.round(Math.random()*10000)
+  const pinString = pin + '';
+
+  if(pinString.length==4){
+    return pin;
+  }else{
+    alert('got 3 digit and calling again',pin);
+    return getPin();
+  }
+}
+
+function generatePin(){
+    const pin = getPin();
+    document.getElementById('display-pin').value = pin;
+    console.log(pin);
+}
+
+////////////////////////////4 digit pin generator end ////////////////////////////////////////////////////////////
+
+
+</script>

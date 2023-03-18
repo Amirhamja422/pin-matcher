@@ -42,7 +42,7 @@
                                 <div class="button">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
+                                <button onclick="verifyPin()" type="submit" class="submit-btn">Submit</button>
                                 <p class="action-left">3 try left</p>
                             </div>
                     </div>
@@ -50,8 +50,8 @@
             </div>
         </div>
         <div class="notify-section">
-            <p class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+            <p id="notify-fail" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="notify-success" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
 </body>
@@ -103,5 +103,23 @@ function generatePin(){
 
 ////////////////////////////4 digit pin generator end ////////////////////////////////////////////////////////////
 
+
+
+function verifyPin(){
+    // console.log('clicked');
+    const pin = document.getElementById('display-pin').value;
+    const typedNumbers = document.getElementById('typed-numbers').value;
+    const SuccessErrors = document.getElementById('notify-success');
+    const failErrors = document.getElementById('notify-fail');
+
+    if(pin==typedNumbers){
+        SuccessErrors.style.display = 'block';
+        failErrors.style.display = 'none';
+        }else{
+        SuccessErrors.style.display = 'none';
+        failErrors.style.display = 'block';
+
+    }
+}
 
 </script>
